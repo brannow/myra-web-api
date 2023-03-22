@@ -1,5 +1,5 @@
 {
-    "name"             : "myra-security-gmbh/web-api",
+    "name"             : "brannow/myra-web-api",
     "description"      : "Php implementation of the myracloud.com api",
     "keywords"         : [
         "myracloud",
