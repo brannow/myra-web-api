@@ -107,7 +107,14 @@ abstract class AbstractEndpoint
             );
         }
 
-        return \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        // Native json_decode instead of \GuzzleHttp\json_decode() (deprecated in Guzzle 7, removed in 8);
+        // same contract: an InvalidArgumentException on invalid JSON.
+        $data = json_decode($response->getBody()->getContents(), true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \InvalidArgumentException('json_decode error: ' . json_last_error_msg());
+        }
+
+        return $data;
     }
 
     /**
